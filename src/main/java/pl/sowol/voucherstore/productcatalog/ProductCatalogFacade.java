@@ -17,7 +17,7 @@ public class ProductCatalogFacade {
     public String createProduct() {
         Product newProduct = new Product(UUID.randomUUID());
 
-        products.put(newProduct.getId(), newProduct)
+        products.put(newProduct.getId(), newProduct);
 
         return newProduct.getId();
     }

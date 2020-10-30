@@ -52,8 +52,8 @@ public class ProductCatalogTest {
         ProductCatalogFacade productCatalog = thereIsProductCatalog();
         String draftProductId = productCatalog.createProduct();
 
-        productCatalog.applyPrice(productId, BigDecimal.valueOf(20.20));
-        productCatalog.updateDetails(productId, MY_PRODUCT_DESC, MY_PRODUCT_PICTURE);
+        productCatalog.applyPrice(draftProductId, BigDecimal.valueOf(20.20));
+        productCatalog.updateDetails(draftProductId, MY_PRODUCT_DESC, MY_PRODUCT_PICTURE);
 
         List<Product> all = productCatalog.getAllAvaiableProducts();
         Assert.assertEquals(1, all.size());
