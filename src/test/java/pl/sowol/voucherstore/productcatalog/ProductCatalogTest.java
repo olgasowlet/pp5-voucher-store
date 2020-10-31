@@ -6,13 +6,15 @@ import org.junit.Test;
 import java.math.BigDecimal;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.*;
+
 public class ProductCatalogTest {
 
     public static final String MY_PRODUCT_DESC = "my product";
     public static final String MY_PRODUCT_PICTURE = "http://myproduct/image";
 
     @Test
-    public void itAllowCreateProduct() {
+    public void itAllowCreateProduct() throws ProductNotFoundException {
         //Arange
         ProductCatalogFacade productCatalog = thereIsProductCatalog();
         //Act
@@ -24,7 +26,7 @@ public class ProductCatalogTest {
     }
 
     @Test
-    public void itAllowsSetProductDescription() {
+    public void itAllowsSetProductDescription() throws ProductNotFoundException {
         ProductCatalogFacade productCatalog = thereIsProductCatalog();
         String productId = productCatalog.createProduct();
 
@@ -37,7 +39,7 @@ public class ProductCatalogTest {
     }
 
     @Test
-    public void itAllowsApplyPrice() {
+    public void itAllowsApplyPrice() throws ProductNotFoundException {
         ProductCatalogFacade productCatalog = thereIsProductCatalog();
         String productId = productCatalog.createProduct();
 
@@ -48,15 +50,63 @@ public class ProductCatalogTest {
     }
 
     @Test
-    public void itAllowsLoadAllProducts() {
+    public void itAllowsLoadAllProducts() throws ProductNotFoundException {
         ProductCatalogFacade productCatalog = thereIsProductCatalog();
         String draftProductId = productCatalog.createProduct();
+        String productId = productCatalog.createProduct();
 
-        productCatalog.applyPrice(draftProductId, BigDecimal.valueOf(20.20));
-        productCatalog.updateDetails(draftProductId, MY_PRODUCT_DESC, MY_PRODUCT_PICTURE);
+        productCatalog.applyPrice(productId, BigDecimal.valueOf(20.20));
+        productCatalog.updateDetails(productId, MY_PRODUCT_DESC, MY_PRODUCT_PICTURE);
 
         List<Product> all = productCatalog.getAllAvaiableProducts();
-        Assert.assertEquals(1, all.size());
+        assertThat(all)
+                .hasSize(1)
+                .extracting(Product::getId)
+                .contains(productId)
+                .doesNotContain((draftProductId));
+    }
+
+    @Test
+    public void itDenyActionOnProductThatNotExist() {
+        ProductCatalogFacade productCatalog = thereIsProductCatalog();
+        try {
+            productCatalog.applyPrice("notExist", BigDecimal.TEN);
+            Assert.fail("should throw exception");
+        } catch (ProductNotFoundException e) {
+            Assert.assertTrue(true);
+        }
+
+    }
+
+    @Test(expected = ProductNotFoundException.class)
+    public void itDenyActionOnProductThatNotExistV2() throws ProductNotFoundException {
+        ProductCatalogFacade productCatalog = thereIsProductCatalog();
+        productCatalog.applyPrice("notExists", BigDecimal.TEN);
+        productCatalog.updateDetails("notExists", "desc", "url");
+
+    }
+
+    @Test
+    public void itDenyActionOnProductThatNotExistV3() throws ProductNotFoundException {
+        ProductCatalogFacade productCatalog = thereIsProductCatalog();
+
+        assertThatThrownBy(() -> productCatalog.applyPrice("NotExists", BigDecimal.TEN))
+                .hasMessage("There is no product with id: NotExists");
+
+
+    }
+
+    @Test
+    public void exceptionOnLoadindNotExisted() throws ProductNotFoundException {
+        ProductCatalogFacade productCatalog = thereIsProductCatalog();
+
+        assertThatThrownBy(() -> productCatalog.applyPrice("NotExists", BigDecimal.TEN))
+                .hasMessage("There is no product with id: NotExists");
+
+        assertThatThrownBy(() -> productCatalog.getById("NotExists"))
+                .hasMessage("There is no product with id: NotExists");
+
+
     }
 
 
