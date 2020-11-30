@@ -1,0 +1,16 @@
+html {
+ box-sizing: border-box;
+}
+
+::after, ::before {
+ box-sizing: inherit;
+}
+
+body {
+ background-color: black;
+ color: white;
+ font-size: 5em;
+ font-weight: bold;
+
+}
+
