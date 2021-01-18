@@ -6,6 +6,7 @@ import static org.assertj.core.api.Assertions.*;
 public class ListProductStorageTest {
 
     //Praca domowa
+    @Test
     public void itAllowToSoreProduct() {
         Product p = thereIsNewPublishedProduct();
         ProductsStorage storage = new ListProductStorage();
