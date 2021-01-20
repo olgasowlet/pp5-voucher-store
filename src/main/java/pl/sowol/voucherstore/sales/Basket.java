@@ -13,8 +13,8 @@ public class Basket {
     private final HashMap<String, Integer> productsCount;
 
     public Basket() {
-        this.products = new HashMap<>();
-        this.productsCount = new HashMap<>();
+        products = new HashMap<>();
+        productsCount = new HashMap<>();
     }
 
     public static Basket empty() {
