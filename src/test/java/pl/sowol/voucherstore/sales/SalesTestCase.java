@@ -3,6 +3,8 @@ package pl.sowol.voucherstore.sales;
 import pl.sowol.voucherstore.productcatalog.ProductCatalogConfiguration;
 import pl.sowol.voucherstore.productcatalog.ProductCatalogFacade;
 import pl.sowol.voucherstore.sales.basket.InMemoryBasketStorage;
+import pl.sowol.voucherstore.sales.offer.OfferMaker;
+import pl.sowol.voucherstore.sales.product.ProductDetails;
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -14,6 +16,7 @@ public class SalesTestCase {
     protected Inventory alwaysExists;
     protected CurrentCustomerContext currentCustomerContext;
     protected String customerId;
+    protected OfferMaker offerMaker;
 
     protected CurrentCustomerContext thereIsCurrentCustomerContext() {
         return () -> customerId;
@@ -40,7 +43,15 @@ public class SalesTestCase {
     }
 
     protected SalesFacade thereIsSalesModule() {
-        return new SalesFacade(basketStorage, productCatalog, currentCustomerContext, alwaysExists);
+        return new SalesFacade(basketStorage, productCatalog, currentCustomerContext, alwaysExists, offerMaker);
+    }
+
+    protected OfferMaker thereIsOfferMaker(ProductCatalogFacade productCatalogFacade) {
+        return new OfferMaker(productId -> {
+            var product = productCatalogFacade.getById(productId);
+
+            return new ProductDetails(product.getId(), product.getDescription(), product.getPrice());
+        });
     }
 
     protected String thereIsCustomerWhoIsDoingSomeShopping() {

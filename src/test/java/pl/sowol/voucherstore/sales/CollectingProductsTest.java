@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import pl.sowol.voucherstore.sales.basket.Basket;
 import pl.sowol.voucherstore.sales.offer.Offer;
+import pl.sowol.voucherstore.sales.offer.OfferMaker;
 
 import java.math.BigDecimal;
 
@@ -16,6 +17,7 @@ public class CollectingProductsTest extends SalesTestCase {
         basketStorage = thereIsBasketStore();
         alwaysExists = thereIsInventory();
         currentCustomerContext = thereIsCurrentCustomerContext();
+        offerMaker = thereIsOfferMaker(productCatalog);
     }
 
     @Test
