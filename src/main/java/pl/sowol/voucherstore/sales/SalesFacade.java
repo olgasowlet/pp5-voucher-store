@@ -2,6 +2,9 @@ package pl.sowol.voucherstore.sales;
 
 import pl.sowol.voucherstore.productcatalog.Product;
 import pl.sowol.voucherstore.productcatalog.ProductCatalogFacade;
+import pl.sowol.voucherstore.sales.basket.Basket;
+import pl.sowol.voucherstore.sales.basket.InMemoryBasketStorage;
+import pl.sowol.voucherstore.sales.offer.Offer;
 
 public class SalesFacade {
 

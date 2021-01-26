@@ -1,7 +1,10 @@
-package pl.sowol.voucherstore.sales;
+package pl.sowol.voucherstore.sales.basket;
 import static org.assertj.core.api.Assertions.*;
 import org.junit.Test;
 import pl.sowol.voucherstore.productcatalog.Product;
+import pl.sowol.voucherstore.sales.Inventory;
+import pl.sowol.voucherstore.sales.basket.Basket;
+import pl.sowol.voucherstore.sales.basket.BasketItem;
 
 import java.util.UUID;
 

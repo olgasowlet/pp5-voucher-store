@@ -1,4 +1,4 @@
-package pl.sowol.voucherstore.sales;
+package pl.sowol.voucherstore.sales.offer;
 
 import java.math.BigDecimal;
 

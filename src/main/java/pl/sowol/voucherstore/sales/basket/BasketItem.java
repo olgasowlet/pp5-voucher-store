@@ -1,4 +1,4 @@
-package pl.sowol.voucherstore.sales;
+package pl.sowol.voucherstore.sales.basket;
 
 public class BasketItem {
     private String productId;

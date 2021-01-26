@@ -1,6 +1,7 @@
-package pl.sowol.voucherstore.sales;
+package pl.sowol.voucherstore.sales.basket;
 
 import pl.sowol.voucherstore.productcatalog.Product;
+import pl.sowol.voucherstore.sales.Inventory;
 import pl.sowol.voucherstore.sales.exceptions.NotEnoughQuantityException;
 
 import java.util.HashMap;

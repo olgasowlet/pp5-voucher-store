@@ -2,6 +2,7 @@ package pl.sowol.voucherstore.sales;
 
 import pl.sowol.voucherstore.productcatalog.ProductCatalogConfiguration;
 import pl.sowol.voucherstore.productcatalog.ProductCatalogFacade;
+import pl.sowol.voucherstore.sales.basket.InMemoryBasketStorage;
 
 import java.math.BigDecimal;
 import java.util.UUID;

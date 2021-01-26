@@ -1,6 +1,7 @@
 package pl.sowol.voucherstore.sales;
 
 import org.junit.Test;
+import pl.sowol.voucherstore.sales.offer.Offer;
 
 public class OrderingTest extends SalesTestCase {
 

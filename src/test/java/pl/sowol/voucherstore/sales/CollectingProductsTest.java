@@ -3,6 +3,8 @@ import static org.assertj.core.api.Assertions.*;
 
 import org.junit.Before;
 import org.junit.Test;
+import pl.sowol.voucherstore.sales.basket.Basket;
+import pl.sowol.voucherstore.sales.offer.Offer;
 
 import java.math.BigDecimal;
 

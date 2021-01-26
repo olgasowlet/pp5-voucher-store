@@ -1,4 +1,6 @@
-package pl.sowol.voucherstore.sales;
+package pl.sowol.voucherstore.sales.basket;
+
+import pl.sowol.voucherstore.sales.basket.Basket;
 
 import java.util.Map;
 import java.util.Optional;
