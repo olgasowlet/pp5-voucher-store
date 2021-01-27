@@ -6,6 +6,7 @@ import java.util.List;
 public class Offer {
     private List<OrderLine> orderItems;
     private BigDecimal total;
+    private Integer productCount;
 
     public Offer(List<OrderLine> orderItems, BigDecimal total) {
 
@@ -19,5 +20,13 @@ public class Offer {
 
     public List<OrderLine> getOrderItems() {
         return orderItems;
+    }
+
+    public boolean isEqual(Offer currentOffer) {
+        return true;
+    }
+
+    public Integer getProductCount() {
+        return productCount;
     }
 }

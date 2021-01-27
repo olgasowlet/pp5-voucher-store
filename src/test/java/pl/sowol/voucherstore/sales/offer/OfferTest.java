@@ -29,8 +29,6 @@ public class OfferTest {
     }
 
     private OfferMaker thereIsOfferMaker() {
-        return new OfferMaker(productId ->
-            new ProductDetails(productId, String.format("%s-desc", productId), BigDecimal.valueOf(50))
-        );
+        return new OfferMaker(productId -> new ProductDetails(productId, String.format("%s-desc", productId), BigDecimal.valueOf(10)));
     }
 }

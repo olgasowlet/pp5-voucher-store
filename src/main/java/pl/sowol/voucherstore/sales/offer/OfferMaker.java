@@ -2,6 +2,7 @@ package pl.sowol.voucherstore.sales.offer;
 
 import pl.sowol.voucherstore.sales.basket.BasketItem;
 import pl.sowol.voucherstore.sales.product.ProductDetails;
+import pl.sowol.voucherstore.productcatalog.Product;
 import pl.sowol.voucherstore.sales.product.ProductDetailsProvider;
 
 import java.math.BigDecimal;

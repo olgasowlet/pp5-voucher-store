@@ -1,5 +1,6 @@
 package pl.sowol.voucherstore.sales;
 
+import pl.sowol.voucherstore.productcatalog.Product;
 import pl.sowol.voucherstore.productcatalog.ProductCatalogConfiguration;
 import pl.sowol.voucherstore.productcatalog.ProductCatalogFacade;
 import pl.sowol.voucherstore.sales.basket.InMemoryBasketStorage;
@@ -48,9 +49,9 @@ public class SalesTestCase {
 
     protected OfferMaker thereIsOfferMaker(ProductCatalogFacade productCatalogFacade) {
         return new OfferMaker(productId -> {
-            var product = productCatalogFacade.getById(productId);
+            Product product = productCatalogFacade.getById(productId);
 
-            return new ProductDetails(product.getId(), product.getDescription(), product.getPrice());
+            return new ProductDetails(productId, product.getDescription(), product.getPrice());
         });
     }
 
