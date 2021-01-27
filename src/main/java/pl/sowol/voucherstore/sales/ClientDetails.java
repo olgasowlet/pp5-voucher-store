@@ -1,2 +1,4 @@
-package pl.sowol.voucherstore.sales;public class ClientDetails {
+package pl.sowol.voucherstore.sales;
+
+public class ClientDetails {
 }

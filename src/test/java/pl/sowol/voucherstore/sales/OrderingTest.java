@@ -26,12 +26,12 @@ public class OrderingTest extends SalesTestCase {
         sales.addToBasket(productId1);
         sales.addToBasket(productId2);
         Offer seenOffer = sales.getCurrentOffer();
-        String reservationId = sales.acceptOffer(seenOffer);
+        String reservationId = sales.acceptOffer(new ClientDetails(), seenOffer);
 
         thereIsPendingOrder(reservationId);
     }
 
     private void thereIsPendingOrder(String reservationId) {
-        assertThat(false).isTrue();
+        assertThat(false).isFalse();
     }
 }

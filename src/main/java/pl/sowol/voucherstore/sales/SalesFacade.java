@@ -6,6 +6,7 @@ import pl.sowol.voucherstore.sales.basket.Basket;
 import pl.sowol.voucherstore.sales.basket.InMemoryBasketStorage;
 import pl.sowol.voucherstore.sales.offer.Offer;
 import pl.sowol.voucherstore.sales.offer.OfferMaker;
+import pl.sowol.voucherstore.sales.ordering.Reservation;
 
 public class SalesFacade {
 
@@ -41,7 +42,18 @@ public class SalesFacade {
         return offerMaker.calculateOffer(basket.getProductsList());
     }
 
-    public String acceptOffer(Offer seenOffer) {
-        return null;
+    public String acceptOffer(ClientDetails clientDetails, Offer seenOffer) {
+        Basket basket = basketStorage.loadForCustomer(currentCustomerContext.getCustomerId())
+                .orElse(Basket.empty());
+
+        Offer currentOffer = offerMaker.calculateOffer(basket.getProductsList());
+
+        if (!seenOffer.equals(currentOffer)) {
+            throw new OfferChangeException();
+        }
+
+        Reservation reservation = Reservation.of(currentOffer);
+
+        return reservation.getId();
     }
 }
