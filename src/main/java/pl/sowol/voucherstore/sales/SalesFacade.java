@@ -7,6 +7,10 @@ import pl.sowol.voucherstore.sales.basket.InMemoryBasketStorage;
 import pl.sowol.voucherstore.sales.offer.Offer;
 import pl.sowol.voucherstore.sales.offer.OfferMaker;
 import pl.sowol.voucherstore.sales.ordering.Reservation;
+import pl.sowol.voucherstore.sales.payment.PaymentDetails;
+import pl.sowol.voucherstore.sales.payment.PaymentGateway;
+import pl.sowol.voucherstore.sales.payment.PaymentUpdateStatusRequest;
+import pl.sowol.voucherstore.sales.payment.UntrustedPaymentExcpetion;
 
 public class SalesFacade {
 
@@ -15,13 +19,15 @@ public class SalesFacade {
     private ProductCatalogFacade productCatalogFacade;
     private CurrentCustomerContext currentCustomerContext;
     private Inventory inventory;
+    private PaymentGateway paymentGateway;
 
-    public SalesFacade(InMemoryBasketStorage basketStorage, ProductCatalogFacade productCatalogFacade, CurrentCustomerContext currentCustomerContext, Inventory inventory, OfferMaker offerMaker) {
+    public SalesFacade(InMemoryBasketStorage basketStorage, ProductCatalogFacade productCatalogFacade, CurrentCustomerContext currentCustomerContext, Inventory inventory, OfferMaker offerMaker, PaymentGateway paymentGateway) {
         this.basketStorage = basketStorage;
         this.productCatalogFacade = productCatalogFacade;
         this.currentCustomerContext = currentCustomerContext;
         this.inventory = inventory;
         this.offerMaker = offerMaker;
+        this.paymentGateway = paymentGateway;
     }
 
     public void addToBasket(String productId1) {
@@ -42,7 +48,7 @@ public class SalesFacade {
         return offerMaker.calculateOffer(basket.getProductsList());
     }
 
-    public String acceptOffer(ClientDetails clientDetails, Offer seenOffer) {
+    public PaymentDetails acceptOffer(ClientDetails clientDetails, Offer seenOffer) {
         Basket basket = basketStorage.loadForCustomer(currentCustomerContext.getCustomerId())
                 .orElse(Basket.empty());
 
@@ -52,8 +58,14 @@ public class SalesFacade {
             throw new OfferChangeException();
         }
 
-        Reservation reservation = Reservation.of(currentOffer);
+        Reservation reservation = Reservation.of(currentOffer, clientDetails);
 
-        return reservation.getId();
+        return paymentGateway.registerFor(reservation);
+    }
+
+    public void handlePaymentStatusChange(PaymentUpdateStatusRequest updateStatusRequest) {
+        if (!paymentGateway.isTrusted(updateStatusRequest)) {
+            throw new UntrustedPaymentExcpetion();
+        }
     }
 }

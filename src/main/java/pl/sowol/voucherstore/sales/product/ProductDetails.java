@@ -12,4 +12,15 @@ public class ProductDetails {
     private String description;
     private BigDecimal unitPrice;
 
+//    public ProductDetails(String productId, String description, BigDecimal price) {
+//
+//    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public BigDecimal getUnitPrice() {
+        return unitPrice;
+    }
 }

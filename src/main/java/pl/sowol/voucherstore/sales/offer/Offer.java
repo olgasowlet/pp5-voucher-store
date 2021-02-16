@@ -6,7 +6,7 @@ import java.util.List;
 public class Offer {
     private List<OrderLine> orderItems;
     private BigDecimal total;
-    private Integer productCount;
+    private Integer productsCount;
 
     public Offer(List<OrderLine> orderItems, BigDecimal total) {
 
@@ -22,11 +22,11 @@ public class Offer {
         return orderItems;
     }
 
-    public boolean isEqual(Offer currentOffer) {
-        return true;
+    public boolean isSameTotal(Offer seenOffer) {
+        return seenOffer.getTotal().equals(total);
     }
 
-    public Integer getProductCount() {
-        return productCount;
+    public Integer getProductsCount() {
+        return productsCount;
     }
 }

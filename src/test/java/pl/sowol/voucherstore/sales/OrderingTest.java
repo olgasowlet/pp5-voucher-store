@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.Before;
 import org.junit.Test;
 import pl.sowol.voucherstore.sales.offer.Offer;
+import pl.sowol.voucherstore.sales.payment.PaymentDetails;
 
 public class OrderingTest extends SalesTestCase {
 
@@ -14,6 +15,7 @@ public class OrderingTest extends SalesTestCase {
         alwaysExists = thereIsInventory();
         currentCustomerContext = thereIsCurrentCustomerContext();
         offerMaker = thereIsOfferMaker(productCatalog);
+        paymentGateway = thereIsInMemoryPaymentGateway();
     }
 
     @Test
@@ -26,12 +28,18 @@ public class OrderingTest extends SalesTestCase {
         sales.addToBasket(productId1);
         sales.addToBasket(productId2);
         Offer seenOffer = sales.getCurrentOffer();
-        String reservationId = sales.acceptOffer(new ClientDetails(), seenOffer);
+        PaymentDetails paymentDetails = sales.acceptOffer(new ClientDetails(), seenOffer);
 
-        thereIsPendingOrder(reservationId);
+        thereIsPendingReservationWithId(paymentDetails.getReservationId());
+        thereIsPaymentRegisteredForReservation(paymentDetails.getReservationId();
     }
 
-    private void thereIsPendingOrder(String reservationId) {
-        assertThat(false).isFalse();
+    private void thereIsPaymentRegisteredForReservation(String reservationId) {
+
     }
+
+    private void thereIsPendingReservationWithId(String reservationId) {
+
+    }
+
 }

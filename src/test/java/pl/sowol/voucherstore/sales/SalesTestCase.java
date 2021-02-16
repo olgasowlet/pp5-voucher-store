@@ -5,6 +5,8 @@ import pl.sowol.voucherstore.productcatalog.ProductCatalogConfiguration;
 import pl.sowol.voucherstore.productcatalog.ProductCatalogFacade;
 import pl.sowol.voucherstore.sales.basket.InMemoryBasketStorage;
 import pl.sowol.voucherstore.sales.offer.OfferMaker;
+import pl.sowol.voucherstore.sales.payment.InMemoryPaymentgateway;
+import pl.sowol.voucherstore.sales.payment.PaymentGateway;
 import pl.sowol.voucherstore.sales.product.ProductDetails;
 
 import java.math.BigDecimal;
@@ -18,6 +20,7 @@ public class SalesTestCase {
     protected CurrentCustomerContext currentCustomerContext;
     protected String customerId;
     protected OfferMaker offerMaker;
+    protected PaymentGateway paymentGateway;
 
     protected CurrentCustomerContext thereIsCurrentCustomerContext() {
         return () -> customerId;
@@ -33,6 +36,10 @@ public class SalesTestCase {
 
     protected ProductCatalogFacade thereIsProductCatalog() {
         return new ProductCatalogConfiguration().productCatalogFacade();
+    }
+
+    protected PaymentGateway thereIsInMemoryPaymentGateway() {
+        return new InMemoryPaymentgateway();
     }
 
     protected String thereIsProductAvaiable() {
