@@ -29,4 +29,5 @@ public class Offer {
     public Integer getProductsCount() {
         return productsCount;
     }
+
 }

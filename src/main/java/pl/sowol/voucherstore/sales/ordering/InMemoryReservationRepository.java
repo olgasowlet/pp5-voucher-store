@@ -3,7 +3,7 @@ package pl.sowol.voucherstore.sales.ordering;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
-public abstract class InMemoryReservationRepository implements ReservationRepository {
+public class InMemoryReservationRepository implements ReservationRepository {
     private final ConcurrentHashMap<String, Reservation> reservations;
 
     public InMemoryReservationRepository() {

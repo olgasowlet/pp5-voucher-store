@@ -1,5 +1,6 @@
 package pl.sowol.voucherstore.productcatalog;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 import org.springframework.data.repository.query.Param;
@@ -17,4 +18,8 @@ public interface ProductsStorage extends Repository<Product, String> {
     Optional<Product> loadById(@Param("productId") String productId);
 
     void save(Product newProduct);
+
+    @Modifying
+    @Query("Delete from Product")
+    void clear();
 }

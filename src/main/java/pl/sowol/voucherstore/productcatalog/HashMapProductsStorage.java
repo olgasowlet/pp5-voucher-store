@@ -31,4 +31,9 @@ public class HashMapProductsStorage implements ProductsStorage {
     public void save(Product newProduct) {
         products.put(newProduct.getId(), newProduct);
     }
+
+    @Override
+    public void clear() {
+        products.clear();
+    }
 }

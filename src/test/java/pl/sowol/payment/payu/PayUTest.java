@@ -33,7 +33,7 @@ public class PayUTest {
     @Test
     public void itCalculateSignatureBasedOnSecondKey() {
         var payu = thereIsPayU();
-        var exampleOrderAsString = "sample_order-confirmation";
+        var exampleOrderAsString = "sample_order_confirmation";
         var expectedSignature = "0A5E5BA858C1A7CBDE3326DBACB8FA8A";
 
         assertThat(payu.isTrusted(exampleOrderAsString, expectedSignature)).isTrue();

@@ -4,7 +4,7 @@ import pl.sowol.voucherstore.sales.ordering.Reservation;
 
 import java.util.UUID;
 
-public class InMemoryPaymentgateway implements PaymentGateway {
+public class InMemoryPaymentGateway implements PaymentGateway {
     @Override
     public PaymentDetails registerFor(Reservation reservation) {
         return PaymentDetails.builder()

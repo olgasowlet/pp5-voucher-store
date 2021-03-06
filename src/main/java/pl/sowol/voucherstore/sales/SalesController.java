@@ -1,6 +1,7 @@
 package pl.sowol.voucherstore.sales;
 
 import org.springframework.web.bind.annotation.*;
+import pl.sowol.payment.payu.exceptions.PayUException;
 import pl.sowol.voucherstore.sales.dto.AcceptOfferRequest;
 import pl.sowol.voucherstore.sales.offer.Offer;
 import pl.sowol.voucherstore.sales.payment.PaymentUpdateStatusRequest;
@@ -25,7 +26,7 @@ public class SalesController {
     }
 
     @PostMapping("/api/accept-offer")
-    public void acceptOffer(@RequestBody AcceptOfferRequest acceptOfferRequest) {
+    public void acceptOffer(@RequestBody AcceptOfferRequest acceptOfferRequest) throws PayUException {
         sales.acceptOffer(acceptOfferRequest.getClientDetails(), acceptOfferRequest.getSeenOffer());
     }
 

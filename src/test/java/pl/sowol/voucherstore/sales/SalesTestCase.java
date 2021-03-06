@@ -5,7 +5,9 @@ import pl.sowol.voucherstore.productcatalog.ProductCatalogConfiguration;
 import pl.sowol.voucherstore.productcatalog.ProductCatalogFacade;
 import pl.sowol.voucherstore.sales.basket.InMemoryBasketStorage;
 import pl.sowol.voucherstore.sales.offer.OfferMaker;
-import pl.sowol.voucherstore.sales.payment.InMemoryPaymentgateway;
+import pl.sowol.voucherstore.sales.ordering.InMemoryReservationRepository;
+import pl.sowol.voucherstore.sales.ordering.ReservationRepository;
+import pl.sowol.voucherstore.sales.payment.InMemoryPaymentGateway;
 import pl.sowol.voucherstore.sales.payment.PaymentGateway;
 import pl.sowol.voucherstore.sales.product.ProductDetails;
 
@@ -21,6 +23,7 @@ public class SalesTestCase {
     protected String customerId;
     protected OfferMaker offerMaker;
     protected PaymentGateway paymentGateway;
+    protected ReservationRepository reservationRepository;
 
     protected CurrentCustomerContext thereIsCurrentCustomerContext() {
         return () -> customerId;
@@ -39,7 +42,7 @@ public class SalesTestCase {
     }
 
     protected PaymentGateway thereIsInMemoryPaymentGateway() {
-        return new InMemoryPaymentgateway();
+        return new InMemoryPaymentGateway();
     }
 
     protected String thereIsProductAvaiable() {
@@ -51,7 +54,7 @@ public class SalesTestCase {
     }
 
     protected SalesFacade thereIsSalesModule() {
-        return new SalesFacade(basketStorage, productCatalog, currentCustomerContext, alwaysExists, offerMaker);
+        return new SalesFacade(basketStorage, productCatalog, currentCustomerContext, alwaysExists, offerMaker, paymentGateway, reservationRepository);
     }
 
     protected OfferMaker thereIsOfferMaker(ProductCatalogFacade productCatalogFacade) {
@@ -64,5 +67,9 @@ public class SalesTestCase {
 
     protected String thereIsCustomerWhoIsDoingSomeShopping() {
         return UUID.randomUUID().toString();
+    }
+
+    protected ReservationRepository thereIsInMemoryReservationRepository() {
+        return new InMemoryReservationRepository();
     }
 }

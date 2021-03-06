@@ -13,7 +13,7 @@ public class PaymentUpdateStatusRequest {
         return new PaymentUpdateStatusRequest(
                 signatureHeader.split(";")[1].replace("signature=",""),
                 signatureHeader.split(";")[2].replace("algorithm=",""),
-                body.split(";")[2].replace("algorithm=","")
+                body
 
         );
     }

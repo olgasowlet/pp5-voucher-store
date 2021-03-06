@@ -18,4 +18,9 @@ public class ListProductStorage implements ProductsStorage {
     public void save(Product newProduct) {
 
     }
+
+    @Override
+    public void clear() {
+
+    }
 }

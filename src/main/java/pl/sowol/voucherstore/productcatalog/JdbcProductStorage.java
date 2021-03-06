@@ -32,6 +32,12 @@ public class JdbcProductStorage implements ProductsStorage {
     }
 
     @Override
+    public void clear() {
+        jdbcTemplate.update("Delete from `products_catalog__products`");
+
+    }
+
+    @Override
     public Optional<Product> loadById(String productId) {
         try {
             return Optional.ofNullable(jdbcTemplate.queryForObject(SELECT_SINGLE_SQL, new Object[] {productId}, getProductRowMapper()));
